@@ -26,7 +26,7 @@ namespace ZipLink.Service
 
         public Link InsertLink(Link link)
         {
-            if (!identityUserService.IsUserExist(link.IdentityId))
+            if (identityUserService.GetCurrentIdentity() == null)
             {
                 throw new Exception("User not exist");
             }
@@ -43,6 +43,7 @@ namespace ZipLink.Service
                 throw new Exception("Wrong Url");
             }
 
+            link.IdentityId = identityUserService.GetCurrentIdentity().Id;
             return linkRepository.Insert(link);
         }
 
