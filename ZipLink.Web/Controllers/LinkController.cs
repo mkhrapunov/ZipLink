@@ -20,7 +20,7 @@ namespace ZipLink.Web.Controllers
 
             if (string.IsNullOrEmpty(fullUrl)) return BadRequest();
 
-            return Ok(fullUrl);
+            return Redirect(fullUrl);
         }
     }
 }

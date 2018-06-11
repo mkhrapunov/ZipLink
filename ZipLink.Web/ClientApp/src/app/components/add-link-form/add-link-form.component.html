@@ -1,0 +1,20 @@
+<div class="row">
+  <div class="col-md-6">
+    <form #f="ngForm" novalidate (ngSubmit)="add(f)">
+
+      <div class="form-group">
+        <label for="url">Введите адрес для сжатия</label>
+        <input id="url" type="text" required name="url" class="form-control" placeholder="Адрес" ngModel>
+      </div>
+
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary" [disabled]="f.invalid">Добавить</button>
+      </div>
+
+      <div *ngIf="errors" class="alert alert-danger" role="alert">
+        <strong>Oops!</strong> {{errors}}
+      </div>
+
+    </form>
+  </div>
+</div>

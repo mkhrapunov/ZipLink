@@ -1,0 +1,28 @@
+<h1>Сжатые ссылки пользователя</h1>
+
+<app-add-link-form></app-add-link-form>
+
+<p *ngIf="!userLinks"><em>Загрузка...</em></p>
+
+<table class='table table-striped' *ngIf="userLinks">
+  <thead>
+    <tr>
+      <th>№</th>
+      <th>Адрес</th>
+      <th>Сжатая ссылка</th>
+      <th>Переходы</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let userLink of userLinks; let ix = index">
+      <td>{{ ix+1 }}.</td>
+      <td>{{ userLink.fullUrl }}</td>
+      <td>{{ userLink.reduction }}</td>
+      <td>{{ userLink.transition }}</td>
+    </tr>
+  </tbody>
+</table>
+
+<div *ngIf="errors" class="alert alert-danger" role="alert">
+  <strong>Oops!</strong> {{errors}}
+</div>
