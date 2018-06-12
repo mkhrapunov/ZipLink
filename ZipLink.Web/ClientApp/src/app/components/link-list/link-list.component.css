@@ -1,0 +1,8 @@
+.href-original {
+  text-decoration: none;
+}
+
+.href-original:hover {
+  text-decoration: none;
+  cursor: default;
+}

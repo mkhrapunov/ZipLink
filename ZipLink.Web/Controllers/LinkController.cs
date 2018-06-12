@@ -3,7 +3,7 @@ using ZipLink.Service;
 
 namespace ZipLink.Web.Controllers
 {
-    [Route("l/{id}")]
+    
     public class LinkController : Controller
     {
         private readonly ILinkService linkService;
@@ -14,6 +14,7 @@ namespace ZipLink.Web.Controllers
 
         // Get l/{id}
         [HttpGet]
+        [Route("l/{id}")]
         public IActionResult Get(string id)
         {
             var fullUrl = linkService.GetFullUrl(id);
@@ -21,6 +22,16 @@ namespace ZipLink.Web.Controllers
             if (string.IsNullOrEmpty(fullUrl)) return BadRequest();
 
             return Redirect(fullUrl);
+        }
+
+        // Get l/info/all
+        [HttpGet]
+        [Route("l/info/count")]
+        public dynamic Info()
+        {
+            return new {
+                LinksCount = linkService.GetAllLinksCount()
+            };
         }
     }
 }

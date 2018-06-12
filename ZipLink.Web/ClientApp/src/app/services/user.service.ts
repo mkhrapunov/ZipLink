@@ -1,4 +1,4 @@
-import { Injectable, Inject } from '@angular/core';
+import { Injectable, Inject, EventEmitter } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 
 import { Observable } from 'rxjs/Rx';
@@ -6,11 +6,34 @@ import { Observable } from 'rxjs/Rx';
 @Injectable()
 export class UserService {
 
-  loggedIn = false;
+  private loggedIn = false;
+  onLoggedIn: EventEmitter<void> = new EventEmitter();
+  onLoggedOut: EventEmitter<void> = new EventEmitter();
 
   constructor(private http: Http, @Inject('BASE_URL') private baseUrl: string)
   {
     this.loggedIn = !!localStorage.getItem('auth_token');
+  }
+
+  getEventEmitters(): EventEmitter<void>[] {
+    return [this.onLoggedIn, this.onLoggedOut];
+  }
+
+  authHeaders(): Headers {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    let authToken = localStorage.getItem('auth_token');
+    headers.append('Authorization', `Bearer ${authToken}`);
+    return headers;
+  }
+
+  getUserInfo(): Observable<Response> {
+    let headers = this.authHeaders();
+
+    return this
+      .http
+      .get(this.baseUrl + "api/userinfo/get", { headers })
+      .catch(this.handleError);
   }
 
   private handleError(error: any) {
@@ -57,9 +80,8 @@ export class UserService {
       .map(res => res.json())
       .map(res => {
         localStorage.setItem('auth_token', res.auth_token);
-        console.log(`logged in with token ${res.auth_token}`);
         this.loggedIn = true;
-        //this._authNavStatusSource.next(true);
+        this.onLoggedIn.emit();
         return true;
       })
       .catch(this.handleError);
@@ -68,7 +90,7 @@ export class UserService {
   logout() {
     localStorage.removeItem('auth_token');
     this.loggedIn = false;
-    console.log('logged out!');
+    this.onLoggedOut.emit();
   }
 
   isLoggedIn() {

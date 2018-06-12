@@ -11,5 +11,6 @@ namespace ZipLink.Data
         public string FullUrl { get; set; }
         public Int32 Transition { get; set; }
         public string IdentityId { get; set; }
+        public DateTime CreateTime { get; set; }
     }
 }

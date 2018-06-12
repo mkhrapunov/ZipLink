@@ -1,5 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
+import { UserService } from '../../services/user.service';
+import { Time } from '@angular/common';
 
 @Component({
   selector: 'app-link-list',
@@ -11,13 +13,10 @@ export class LinkListComponent implements OnInit {
   public userLinks: UserLink[];
   public errors: string;
 
-  constructor(private http: Http, @Inject('BASE_URL') private baseUrl: string) { }
+  constructor(private http: Http, private userService: UserService, @Inject('BASE_URL') public baseUrl: string) { }
 
   ngOnInit() {
-    let headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    let authToken = localStorage.getItem('auth_token');
-    headers.append('Authorization', `Bearer ${authToken}`);
+    let headers = this.userService.authHeaders();
 
     return this.http.get(this.baseUrl + "api/linkmanage/all", { headers })
       .map(response => this.userLinks = response.json())
@@ -31,4 +30,5 @@ interface UserLink {
   reduction: string;
   fullUrl: string;
   transition: number;
+  createTime: Date
 }

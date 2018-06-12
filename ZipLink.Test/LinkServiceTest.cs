@@ -150,6 +150,21 @@ namespace ZipLink.Test
         }
 
         [TestMethod]
+        public void Check_all_links_count()
+        {
+            Add_test_user();
+            Add_test_link("http://ya.ru");
+            Add_test_link("http://ya1.ru");
+            Add_test_user("user2");
+            Add_test_link("http://ya.ru");
+            Add_test_link("http://ya1.ru");
+            Add_test_link("http://ya2.ru");
+
+            var totalLinkCount = linkService.GetAllLinksCount();
+            Assert.AreEqual(5, totalLinkCount);
+        }
+
+        [TestMethod]
         [ExpectedException(typeof(Exception),
             "User not exist")]
         public void Add_link_without_user_throws()

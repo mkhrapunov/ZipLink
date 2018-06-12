@@ -13,8 +13,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="4.0.0" />
-    <PackageReference Include="FluentValidation.AspNetCore" Version="7.6.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="2.1.0" />
   </ItemGroup>
@@ -26,6 +24,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\app\userInfo.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\ZipLink.Repo\ZipLink.Repo.csproj" />
     <ProjectReference Include="..\ZipLink.Service\ZipLink.Service.csproj" />
   </ItemGroup>
@@ -33,6 +35,10 @@
   <ItemGroup>
     <Folder Include="ClientApp\src\app\services\" />
     <Folder Include="Helpers\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\userInfo.ts" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

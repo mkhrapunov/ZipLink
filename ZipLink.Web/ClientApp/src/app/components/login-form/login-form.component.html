@@ -1,5 +1,8 @@
 <div class="row">
   <div class="col-md-6 new-user-alert">
+    <div *ngIf="isNew" class="alert alert-success" role="alert">
+      <strong>Успешная регистрация!</strong> Войдите в свой аккаунт
+    </div>
     <h2>Вход</h2>
   </div>
 </div>
@@ -10,7 +13,7 @@
 
       <div class="form-group">
         <label for="userName">Имя пользователя (логин)</label>
-        <input id="userName" type="text" required name="userName" class="form-control" placeholder="Имя пользователя (логин)" ngModel>
+        <input id="userName" type="text" required name="userName" class="form-control" placeholder="Имя пользователя (логин)" value="{{userName}}" ngModel>
       </div>
       <div class="form-group">
         <label for="password">Пароль</label>
@@ -22,7 +25,7 @@
       </div>
 
       <div *ngIf="errors" class="alert alert-danger" role="alert">
-        <strong>Oops!</strong> {{errors}}
+        <strong>Ой!</strong> {{errors}}
       </div>
 
     </form>

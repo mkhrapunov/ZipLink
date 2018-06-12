@@ -1,9 +1,5 @@
-﻿using FluentValidation.Attributes;
-using ZipLink.Web.ViewModels.Validations;
-
-namespace ZipLink.Web.ViewModels
+﻿namespace ZipLink.Web.ViewModels
 {
-    [Validator(typeof(RegistrationViewModelValidator))]
     public class RegistrationViewModel
     {
         public string UserName { get; set; }

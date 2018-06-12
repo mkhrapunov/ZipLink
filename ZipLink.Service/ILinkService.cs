@@ -10,5 +10,6 @@ namespace ZipLink.Service
         IEnumerable<Link> GetLinks();
         Link InsertLink(Link link);
         string GetFullUrl(string reduction);
+        int GetAllLinksCount();
     }
 }

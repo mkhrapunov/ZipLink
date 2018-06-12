@@ -42,7 +42,6 @@ namespace ZipLink.Service
             {
                 throw new Exception("Wrong Url");
             }
-
             link.IdentityId = identityUserService.GetCurrentIdentity().Id;
             return linkRepository.Insert(link);
         }
@@ -61,6 +60,11 @@ namespace ZipLink.Service
             {
                 return String.Empty;
             }
+        }
+
+        public int GetAllLinksCount()
+        {
+            return linkRepository.GetAll().Count();
         }
     }
 }

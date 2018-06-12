@@ -20,12 +20,10 @@ export class RegistrationFormComponent implements OnInit {
     this.errors = '';
     if (valid) {
       this.userService.register(value.userName, value.password)
-        //.finally(() => this.isRequesting = false)
         .subscribe(
           result => {
             if (result) {
-              alert("Register successfull");
-              //this.router.navigate(['/login'], { queryParams: { brandNew: true, email: value.email } });
+              this.router.navigate(['login'], { queryParams: { 'new': true, 'userName': value.userName } });
             }
           },
           errors => this.errors = errors);

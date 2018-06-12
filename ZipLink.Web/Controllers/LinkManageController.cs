@@ -25,7 +25,12 @@ namespace ZipLink.Web.Controllers
         {
             return linkService
                     .GetLinks()
-                    .Select(l => new {l.Reduction, l.FullUrl, l.Transition})
+                    .Select(l => new {
+                        l.Reduction,
+                        l.FullUrl,
+                        l.Transition,
+                        l.CreateTime
+                    })
                     .ToList();
         }
 

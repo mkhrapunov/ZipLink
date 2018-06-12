@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using Microsoft.EntityFrameworkCore.ValueGeneration.Internal;
 using ZipLink.Data.ValueGenerators;
 
 namespace ZipLink.Data
@@ -22,6 +20,9 @@ namespace ZipLink.Data
             entityBuilder
                 .Property(t => t.Transition)
                 .HasValueGenerator((p, e) => new ZeroValueGenerator());
+            entityBuilder
+                .Property(t => t.CreateTime)
+                .HasValueGenerator((p, e) => new DateTimeNowValueGenerator());
             entityBuilder
                 .Property(t => t.IdentityId)
                 .IsRequired();

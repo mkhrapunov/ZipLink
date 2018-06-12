@@ -1,6 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
 import { NgForm } from '@angular/forms';
+import { UserService } from '../../services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-link-form',
@@ -11,7 +13,7 @@ export class AddLinkFormComponent implements OnInit {
 
   errors: string;
 
-  constructor(private http: Http, @Inject('BASE_URL') private baseUrl: string) { }
+  constructor(private http: Http, private userService: UserService, private router: Router, @Inject('BASE_URL') private baseUrl: string) { }
 
   ngOnInit() {
   }
@@ -21,15 +23,13 @@ export class AddLinkFormComponent implements OnInit {
     this.errors = '';
 
     if (valid) {
-      let headers = new Headers();
-      headers.append('Content-Type', 'application/json');
-      let authToken = localStorage.getItem('auth_token');
-      headers.append('Authorization', `Bearer ${authToken}`);
+      let headers = this.userService.authHeaders();
       let linkForReduction = <LinkForReduction>form.value;
 
       return this.http.post(this.baseUrl + "api/linkmanage/add", linkForReduction, { headers })
         .map(response => {
           form.reset();
+          this.router.navigate(['links']);
         })
         .catch(err => this.errors = err)
         .subscribe();
