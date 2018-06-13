@@ -29,7 +29,6 @@ export class LoginFormComponent implements OnInit {
     this.errors = '';
     if (valid) {
       this.userService.login(value.userName, value.password)
-        //.finally(() => this.isRequesting = false)
         .subscribe(
           result => {
             if (result) {

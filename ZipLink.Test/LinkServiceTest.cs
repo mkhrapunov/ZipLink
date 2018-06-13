@@ -166,28 +166,42 @@ namespace ZipLink.Test
 
         [TestMethod]
         [ExpectedException(typeof(Exception),
-            "User not exist")]
+            "Пользователь не существует")]
         public void Add_link_without_user_throws()
         {
             linkService.InsertLink(new Link() { FullUrl = "http://ya.ru" } );
         }
 
         [TestMethod]
-        [ExpectedException(typeof(Exception))]
         public void Add_same_link_throws()
         {
             Add_test_user();
             Add_test_link();
-            Add_test_link();
+            try
+            {
+                Add_test_link();
+            }
+            catch (Exception ex)
+            {
+                Assert.IsTrue(ex.Message.EndsWith("уже добавлен для текущего пользователя"));
+            }
+            
         }
 
         [TestMethod]
-        [ExpectedException(typeof(Exception),
-            "Wrong Url")]
         public void Add_wrong_link_throws()
         {
             Add_test_user();
-            Add_test_link("blablabla");
+            try
+            {
+                Add_test_link("blablabla");
+                Assert.Fail();
+            }
+            catch (Exception ex)
+            {
+                Assert.IsTrue(ex.Message.StartsWith("Некорректный адрес"));
+            }
+
         }
     }
 

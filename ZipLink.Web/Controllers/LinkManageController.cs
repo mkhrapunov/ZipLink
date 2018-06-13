@@ -50,7 +50,9 @@ namespace ZipLink.Web.Controllers
             }
             catch (Exception ex)
             {
-                return new BadRequestObjectResult(ex.Message);
+                var badRequest = new BadRequestObjectResult(ex);
+
+                return badRequest;
             }
 
         }

@@ -28,11 +28,11 @@ namespace ZipLink.Service
         {
             if (identityUserService.GetCurrentIdentity() == null)
             {
-                throw new Exception("User not exist");
+                throw new Exception("Пользователь не существует");
             }
             if (this.GetLinks().Any(t => t.FullUrl == link.FullUrl))
             {
-                throw new Exception($"Already added {link.FullUrl} for this user");
+                throw new Exception($"{link.FullUrl} уже добавлен для текущего пользователя");
             }
             Uri uriResult;
             bool result = Uri.TryCreate(link.FullUrl, UriKind.Absolute, out uriResult)
@@ -40,7 +40,7 @@ namespace ZipLink.Service
 
             if (!result)
             {
-                throw new Exception("Wrong Url");
+                throw new Exception($"Некорректный адрес {link}");
             }
             link.IdentityId = identityUserService.GetCurrentIdentity().Id;
             return linkRepository.Insert(link);

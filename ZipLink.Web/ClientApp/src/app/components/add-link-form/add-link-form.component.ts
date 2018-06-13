@@ -1,9 +1,10 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
 import { NgForm } from '@angular/forms';
-import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
 import { LinkForReduction } from '../../models/linkForReduction';
+import { LinkService } from '../../services/link.service';
+import { BadResponse } from '../../models/badResponse';
 
 @Component({
   selector: 'app-add-link-form',
@@ -13,7 +14,7 @@ export class AddLinkFormComponent implements OnInit {
 
   errors: string;
 
-  constructor(private http: Http, private userService: UserService, private router: Router, @Inject('BASE_URL') private baseUrl: string) { }
+  constructor(private http: Http, private router: Router, private linkService: LinkService, @Inject('BASE_URL') private baseUrl: string) { }
 
   ngOnInit() {
   }
@@ -23,16 +24,10 @@ export class AddLinkFormComponent implements OnInit {
     this.errors = '';
 
     if (valid) {
-      let headers = this.userService.authHeaders();
       let linkForReduction = <LinkForReduction>form.value;
-
-      return this.http.post(this.baseUrl + "api/linkmanage/add", linkForReduction, { headers })
-        .map(response => {
-          form.reset();
-          this.router.navigate(['links']);
-        })
-        .catch(err => this.errors = err)
-        .subscribe();
+      this.linkService.add(linkForReduction).subscribe(
+        resp => form.reset(),
+        err => this.errors = (<BadResponse>err.json()).Message);
     }
   }
 }

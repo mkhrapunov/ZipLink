@@ -24,6 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\app\models\badResponse.ts" />
     <None Remove="ClientApp\src\app\models\credentials.ts" />
     <None Remove="ClientApp\src\app\models\linkForReduction.ts" />
     <None Remove="ClientApp\src\app\models\linksInfo.ts" />
@@ -43,6 +44,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\models\badResponse.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\credentials.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\linkForReduction.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\models\linksInfo.ts" />

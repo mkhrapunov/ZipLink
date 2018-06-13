@@ -1,6 +1,5 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { Http, Response, Headers } from '@angular/http';
-import { UserService } from '../../services/user.service';
+import { Component, OnInit, Inject, OnDestroy } from '@angular/core';
+import { LinkService } from '../../services/link.service';
 import { Time } from '@angular/common';
 import { UserLink } from '../../models/userLink';
 
@@ -9,20 +8,32 @@ import { UserLink } from '../../models/userLink';
   templateUrl: './link-list.component.html',
   styleUrls: ['./link-list.component.css']
 })
-export class LinkListComponent implements OnInit {
+export class LinkListComponent implements OnInit, OnDestroy {
 
   public userLinks: UserLink[];
   public errors: string;
+  public linkAddedSubscription: any;
 
-  constructor(private http: Http, private userService: UserService, @Inject('BASE_URL') public baseUrl: string) { }
+  constructor(private linkService: LinkService, @Inject('BASE_URL') public baseUrl: string) { }
 
   ngOnInit() {
-    let headers = this.userService.authHeaders();
+    this.linkAddedSubscription = this.linkService.getOnLinkAddedEmitter();
 
-    return this.http.get(this.baseUrl + "api/linkmanage/all", { headers })
-      .map(response => this.userLinks = response.json())
-      .catch(err => this.errors = err)
-      .subscribe();
+    this.linkAddedSubscription.subscribe(() => {
+      this.getLinks();
+    });
+
+    this.getLinks();
+  }
+
+  ngOnDestroy(): void {
+    this.linkAddedSubscription.unsubscribe();
+  }
+
+  getLinks() {
+    this.linkService.getLinks().subscribe(
+      resp => this.userLinks = <UserLink[]>resp.json(),
+      err => this.errors = err);
   }
 
 }

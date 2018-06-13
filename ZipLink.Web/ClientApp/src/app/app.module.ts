@@ -11,6 +11,7 @@ import { HomeComponent } from './components/home/home.component';
 import { RegistrationFormComponent } from './components/registration-form/registration-form.component';
 
 import { UserService } from './services/user.service';
+import { LinkService } from './services/link.service';
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { LogoutComponent } from './components/logout/logout.component';
 import { LinkListComponent } from './components/link-list/link-list.component';
@@ -40,7 +41,7 @@ import { AddLinkFormComponent } from './components/add-link-form/add-link-form.c
       { path: 'logout', component: LogoutComponent }
     ])
   ],
-  providers: [UserService],
+  providers: [UserService, LinkService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
