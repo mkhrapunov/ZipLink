@@ -14,9 +14,9 @@ using System;
 using System.Text;
 using ZipLink.Repo;
 using ZipLink.Service;
+using ZipLink.Services;
 using ZipLink.Web.Auth;
 using ZipLink.Web.Helpers;
-using ZipLink.Web.Services;
 
 namespace ZipLink.Web
 {

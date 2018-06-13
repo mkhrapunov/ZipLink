@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UserService } from '../../services/user.service';
+import { Credentials } from '../../models/credentials';
 
 @Component({
   selector: 'app-login-form',
-  templateUrl: './login-form.component.html',
-  styleUrls: ['./login-form.component.css']
+  templateUrl: './login-form.component.html'
 })
 export class LoginFormComponent implements OnInit {
 
@@ -42,7 +42,3 @@ export class LoginFormComponent implements OnInit {
 
 }
 
-interface Credentials {
-  userName: string;
-  password: string;
-}

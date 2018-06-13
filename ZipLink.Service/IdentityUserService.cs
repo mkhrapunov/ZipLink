@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using ZipLink.Repo;
 using ZipLink.Service;
 
-namespace ZipLink.Web.Services
+namespace ZipLink.Services
 {
     public class IdentityUserService : IIdentityUserService
     {

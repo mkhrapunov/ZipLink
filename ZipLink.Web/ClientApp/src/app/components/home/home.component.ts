@@ -2,7 +2,8 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { Http, Response } from '@angular/http';
-import { UserInfo } from '../../userInfo';
+import { UserInfo } from '../../models/userInfo';
+import { LinksInfo } from '../../models/linksInfo';
 
 @Component({
   selector: 'app-home',
@@ -30,6 +31,3 @@ export class HomeComponent implements OnInit {
   }
 }
 
-interface LinksInfo {
-  linksCount: number;
-}

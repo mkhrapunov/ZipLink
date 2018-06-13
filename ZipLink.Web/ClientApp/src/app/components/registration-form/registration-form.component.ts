@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
+import { UserRegistration } from '../../models/userRegistration';
 
 @Component({
   selector: 'app-registration-form',
-  templateUrl: './registration-form.component.html',
-  styleUrls: ['./registration-form.component.css']
+  templateUrl: './registration-form.component.html'
 })
 export class RegistrationFormComponent implements OnInit {
 
@@ -32,7 +32,3 @@ export class RegistrationFormComponent implements OnInit {
 
 }
 
-interface UserRegistration {
-  userName: string,
-  password: string
-}

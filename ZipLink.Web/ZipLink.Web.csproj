@@ -24,6 +24,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\app\models\credentials.ts" />
+    <None Remove="ClientApp\src\app\models\linkForReduction.ts" />
+    <None Remove="ClientApp\src\app\models\linksInfo.ts" />
+    <None Remove="ClientApp\src\app\models\userLink.ts" />
+    <None Remove="ClientApp\src\app\models\userRegistration.ts" />
     <None Remove="ClientApp\src\app\userInfo.ts" />
   </ItemGroup>
 
@@ -38,7 +43,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <TypeScriptCompile Include="ClientApp\src\app\userInfo.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\credentials.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\linkForReduction.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\linksInfo.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\userInfo.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\userLink.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\models\userRegistration.ts" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

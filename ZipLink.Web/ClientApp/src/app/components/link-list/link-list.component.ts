@@ -2,6 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
 import { UserService } from '../../services/user.service';
 import { Time } from '@angular/common';
+import { UserLink } from '../../models/userLink';
 
 @Component({
   selector: 'app-link-list',
@@ -26,9 +27,3 @@ export class LinkListComponent implements OnInit {
 
 }
 
-interface UserLink {
-  reduction: string;
-  fullUrl: string;
-  transition: number;
-  createTime: Date
-}

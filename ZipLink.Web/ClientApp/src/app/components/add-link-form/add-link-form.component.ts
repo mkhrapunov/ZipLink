@@ -3,11 +3,11 @@ import { Http, Response, Headers } from '@angular/http';
 import { NgForm } from '@angular/forms';
 import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
+import { LinkForReduction } from '../../models/linkForReduction';
 
 @Component({
   selector: 'app-add-link-form',
-  templateUrl: './add-link-form.component.html',
-  styleUrls: ['./add-link-form.component.css']
+  templateUrl: './add-link-form.component.html'
 })
 export class AddLinkFormComponent implements OnInit {
 
@@ -37,6 +37,4 @@ export class AddLinkFormComponent implements OnInit {
   }
 }
 
-interface LinkForReduction {
-  url: string;
-}
+
