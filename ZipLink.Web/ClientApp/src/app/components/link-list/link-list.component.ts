@@ -12,17 +12,12 @@ export class LinkListComponent implements OnInit, OnDestroy {
 
   public userLinks: UserLink[];
   public errors: string;
-  public linkAddedSubscription: any;
+  private linkAddedSubscription: any;
 
   constructor(private linkService: LinkService, @Inject('BASE_URL') public baseUrl: string) { }
 
   ngOnInit() {
-    this.linkAddedSubscription = this.linkService.getOnLinkAddedEmitter();
-
-    this.linkAddedSubscription.subscribe(() => {
-      this.getLinks();
-    });
-
+    this.linkAddedSubscription = this.linkService.onLinkAdded.subscribe(() => this.getLinks());
     this.getLinks();
   }
 
